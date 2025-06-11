@@ -36,8 +36,8 @@
       padding: 15px;
       border: 1px solid #282a2c;
       border-radius: 8px;
-      width: 80%;
-      max-width: 300px;
+      width: 80%; /* Adjusted for better responsiveness */
+      max-width: 350px; /* Slightly increased max-width */
       margin-bottom: 20px;
       transition: background-color 1s ease-in-out;
       background-color: #282a2c;
@@ -55,7 +55,7 @@
       border-radius: 8px;
       cursor: pointer;
       width: 80%;
-      max-width: 300px;
+      max-width: 350px; /* Slightly increased max-width */
       transition: background-color 0.3s, box-shadow 0.3s;
       background-image: linear-gradient(to bottom right, #131314, #999);
     }
@@ -86,18 +86,18 @@
 
     /* Updated style for Copilot button */
     .search-button.copilot {
-      background-image: linear-gradient(to bottom right, #fdedde, #f7f4f2); /* Inspired by provided colors */
-      color: #333; /* Adjust text color for light background */
+      background-image: linear-gradient(to bottom right, #131314, #af8966); /* Flipped gradient colors */
+      color: #fff; /* Adjusted text color for dark background */
     }
 
     /* New style for Wikipedia button */
     .search-button.wikipedia {
-      background-image: linear-gradient(to bottom right, #131314, #000); /* Darker, almost black */
+      background-image: linear-gradient(to bottom right, #131314, #c2b6a7); /* Added very dark white */
     }
 
     /* New style for Perplexity button */
     .search-button.perplexity {
-      background-image: linear-gradient(to bottom right, #131314, #663399); /* A shade of purple */
+      background-image: linear-gradient(to bottom right, #131314, #663399);
     }
 
     .search-button:hover {
@@ -114,11 +114,13 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 20px;
+      max-width: 1200px; /* Added max-width to grid container */
+      margin: 0 auto; /* Center the grid */
     }
 
     .list-container {
-      display: none;
-      flex-direction: column;
+      display: none; /* Hidden by default, activated in media query */
+      flex-direction: column; /* Default for list */
       align-items: center;
       gap: 20px;
     }
@@ -129,7 +131,23 @@
       }
 
       .list-container {
-        display: flex;
+        display: grid; /* Changed to grid for mobile */
+        grid-template-columns: repeat(2, 1fr); /* Two columns on mobile */
+        gap: 20px;
+        /* align-items: center; removed as it's not needed for grid, items center themselves in cells if width is less than cell */
+      }
+      .search-box, .search-button {
+        width: 90%; /* Adjust width for better fit in two columns */
+        max-width: unset; /* Remove max-width to allow elements to fill grid cells */
+      }
+      .search-container {
+        margin-bottom: 0; /* Remove extra margin when in grid */
+      }
+    }
+
+    @media (max-width: 480px) { /* For very small screens, revert to single column */
+      .list-container {
+        grid-template-columns: 1fr; /* Single column */
       }
     }
   </style>
@@ -140,62 +158,62 @@
 
   <div class="grid-container">
     <div class="search-container">
-      <input type="text" id="search-reddit" class="search-box" placeholder="Enter your Reddit search term">
+      <input type="text" id="search-reddit-grid" class="search-box" placeholder="Enter your Reddit search term">
       <button class="search-button reddit">Search Reddit</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-dribbble" class="search-box" placeholder="Enter your Dribbble search term">
+      <input type="text" id="search-dribbble-grid" class="search-box" placeholder="Enter your Dribbble search term">
       <button class="search-button dribbble">Search Dribbble</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-behance" class="search-box" placeholder="Enter your Behance search term">
+      <input type="text" id="search-behance-grid" class="search-box" placeholder="Enter your Behance search term">
       <button class="search-button behance">Search Behance</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-youtube" class="search-box" placeholder="Enter your Youtube term">
+      <input type="text" id="search-youtube-grid" class="search-box" placeholder="Enter your Youtube term">
       <button class="search-button youtube">Search YouTube</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-google" class="search-box" placeholder="Enter your Google search term">
+      <input type="text" id="search-google-grid" class="search-box" placeholder="Enter your Google search term">
       <button class="search-button google">Search Google</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-copilot" class="search-box" placeholder="Enter your Copilot inquiry">
+      <input type="text" id="search-copilot-grid" class="search-box" placeholder="Enter your Copilot inquiry">
       <button class="search-button copilot">Search Copilot</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-chatgpt" class="search-box" placeholder="Enter your ChatGPT inquiry">
+      <input type="text" id="search-chatgpt-grid" class="search-box" placeholder="Enter your ChatGPT inquiry">
       <button class="search-button chatgpt">Search ChatGPT</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-wikipedia" class="search-box" placeholder="Enter your Wikipedia search term">
+      <input type="text" id="search-wikipedia-grid" class="search-box" placeholder="Enter your Wikipedia search term">
       <button class="search-button wikipedia">Search Wikipedia</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-perplexity" class="search-box" placeholder="Enter your Perplexity inquiry">
+      <input type="text" id="search-perplexity-grid" class="search-box" placeholder="Enter your Perplexity inquiry">
       <button class="search-button perplexity">Search Perplexity</button>
     </div>
   </div>
 
   <div class="list-container">
     <div class="search-container">
-      <input type="text" id="search-reddit" class="search-box" placeholder="Enter your Reddit search term">
+      <input type="text" id="search-reddit-list" class="search-box" placeholder="Enter your Reddit search term">
       <button class="search-button reddit">Search Reddit</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-dribbble" class="search-box" placeholder="Enter your Dribbble search term">
+      <input type="text" id="search-dribbble-list" class="search-box" placeholder="Enter your Dribbble search term">
       <button class="search-button dribbble">Search Dribbble</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-behance" class="search-box" placeholder="Enter your Behance search term">
+      <input type="text" id="search-behance-list" class="search-box" placeholder="Enter your Behance search term">
       <button class="search-button behance">Search Behance</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-youtube" class="search-box" placeholder="Enter your Youtube term">
+      <input type="text" id="search-youtube-list" class="search-box" placeholder="Enter your Youtube term">
       <button class="search-button youtube">Search YouTube</button>
     </div>
     <div class="search-container">
-      <input type="text" id="search-google" class="search-box" placeholder="Enter your Google search term">
+      <input type="text" id="search-google-list" class="search-box" placeholder="Enter your Google search term">
       <button class="search-button google">Search Google</button>
     </div>
     <div class="search-container">
@@ -217,160 +235,93 @@
   </div>
 
   <script>
-    // Get references to all search buttons
-    const searchGoogleButton = document.querySelector('.search-button.google');
-    const searchRedditButton = document.querySelector('.search-button.reddit');
-    const searchDribbbleButton = document.querySelector('.search-button.dribbble');
-    const searchBehanceButton = document.querySelector('.search-button.behance');
-    const searchYouTubeButton = document.querySelector('.search-button.youtube');
-    const searchChatgptButtons = document.querySelectorAll('.search-button.chatgpt');
-    const searchCopilotButtons = document.querySelectorAll('.search-button.copilot');
-    const searchWikipediaButtons = document.querySelectorAll('.search-button.wikipedia'); // Select all Wikipedia buttons
-    const searchPerplexityButtons = document.querySelectorAll('.search-button.perplexity'); // Select all Perplexity buttons
-
-
-    // Event listener for Google search
-    searchGoogleButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      const searchTerm = document.getElementById('search-google').value;
-      const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`;
-      window.open(googleSearchUrl, '_blank');
-    });
-
-    // Event listener for Reddit search
-    searchRedditButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      const searchTerm = document.getElementById('search-reddit').value;
-      const newUrl = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:reddit.com`;
-      window.open(newUrl, '_blank');
-    });
-
-    // Event listener for Dribbble search
-    searchDribbbleButton.addEventListener('click', () => {
-      const searchTerm = document.getElementById('search-dribbble').value;
-      const newUrl = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:dribbble.com`;
-      window.open(newUrl, '_blank');
-    });
-
-    // Event listener for Behance search
-    searchBehanceButton.addEventListener('click', () => {
-      const searchTerm = document.getElementById('search-behance').value;
-      const newUrl = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:behance.net`;
-      window.open(newUrl, '_blank');
-    });
-
-    // Event listener for Youtube
-    searchYouTubeButton.addEventListener('click', () => {
-      const searchTerm = document.getElementById('search-youtube').value;
-      const newUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(searchTerm)}`;
-      window.open(newUrl, '_blank');
-    });
-
-    // Event listener for Copilot search (all Copilot buttons)
-    searchCopilotButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const inputElement = button.previousElementSibling;
-        const searchTerm = inputElement.value;
-        const copilotUrl = `https://www.bing.com/search?showconv=1&sendquery=1&q=${encodeURIComponent(searchTerm)}`;
-        window.open(copilotUrl, '_blank');
-      });
-    });
-
-    // Event listener for ChatGPT search (all ChatGPT buttons)
-    searchChatgptButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const inputElement = button.previousElementSibling;
-        const searchTerm = inputElement.value;
-        const chatgptUrl = `https://chat.openai.com/?q=${encodeURIComponent(searchTerm)}`;
-        window.open(chatgptUrl, '_blank');
-      });
-    });
-
-    // Event listener for Wikipedia search (all Wikipedia buttons)
-    searchWikipediaButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const inputElement = button.previousElementSibling;
-        const searchTerm = inputElement.value;
-        const wikipediaUrl = `https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(searchTerm)}`;
-        window.open(wikipediaUrl, '_blank');
-      });
-    });
-
-    // Event listener for Perplexity search (all Perplexity buttons)
-    searchPerplexityButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const inputElement = button.previousElementSibling;
-        const searchTerm = inputElement.value;
-        const perplexityUrl = `https://www.perplexity.ai/search?q=${encodeURIComponent(searchTerm)}`;
-        window.open(perplexityUrl, '_blank');
-      });
-    });
-
-
     // Function to add Enter key listener to input fields
     function addEnterKeyListener(inputElement, buttonElement) {
-      inputElement.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          buttonElement.click();
-        }
-      });
+      if (inputElement && buttonElement) { // Ensure both elements exist
+        inputElement.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            buttonElement.click();
+          }
+        });
+      }
     }
 
-    // Get references to all input fields
-    const searchGoogleInput = document.getElementById('search-google');
-    const searchRedditInput = document.getElementById('search-reddit');
-    const searchDribbbleInput = document.getElementById('search-dribbble');
-    const searchBehanceInput = document.getElementById('search-behance');
-    const searchYouTubeInput = document.getElementById('search-youtube');
-    const searchCopilotInputGrid = document.getElementById('search-copilot');
-    const searchCopilotInputList = document.getElementById('search-copilot-list');
-    const searchChatgptInputGrid = document.getElementById('search-chatgpt');
-    const searchChatgptInputList = document.getElementById('search-chatgpt-list');
-    const searchWikipediaInputGrid = document.getElementById('search-wikipedia'); // Input for grid layout
-    const searchWikipediaInputList = document.getElementById('search-wikipedia-list'); // Input for list layout
-    const searchPerplexityInputGrid = document.getElementById('search-perplexity'); // Input for grid layout
-    const searchPerplexityInputList = document.getElementById('search-perplexity-list'); // Input for list layout
+    // Function to set up search functionality for a given ID suffix and base URL
+    function setupSearch(idSuffix, baseUrl) {
+      const inputGrid = document.getElementById(`search-${idSuffix}-grid`);
+      const inputList = document.getElementById(`search-${idSuffix}-list`);
+      const buttonGrid = inputGrid ? inputGrid.nextElementSibling : null;
+      const buttonList = inputList ? inputList.nextElementSibling : null;
 
+      if (buttonGrid) {
+        buttonGrid.addEventListener('click', () => {
+          const searchTerm = inputGrid.value;
+          let url = baseUrl;
+          if (idSuffix === 'youtube') {
+            url = `https://www.youtube.com/results?search_query=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'google') {
+            url = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'reddit') {
+            url = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:reddit.com`;
+          } else if (idSuffix === 'dribbble') {
+            url = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:dribbble.com&tbm=isch`; /* Added &tbm=isch for image search */
+          } else if (idSuffix === 'behance') {
+            url = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:behance.net&tbm=isch`; /* Added &tbm=isch for image search */
+          } else if (idSuffix === 'copilot') {
+            url = `https://www.bing.com/search?showconv=1&sendquery=1&q=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'chatgpt') {
+            url = `https://chat.openai.com/?q=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'wikipedia') {
+            url = `https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'perplexity') {
+            url = `https://www.perplexity.ai/search?q=${encodeURIComponent(searchTerm)}`;
+          }
+          window.open(url, '_blank');
+        });
+        addEnterKeyListener(inputGrid, buttonGrid);
+      }
 
-    // Apply Enter key listener to all input fields and their respective buttons
-    addEnterKeyListener(searchGoogleInput, searchGoogleButton);
-    addEnterKeyListener(searchRedditInput, searchRedditButton);
-    addEnterKeyListener(searchDribbbleInput, searchDribbbleButton);
-    addEnterKeyListener(searchBehanceInput, searchBehanceButton);
-    addEnterKeyListener(searchYouTubeInput, searchYouTubeButton);
-
-    // Apply Enter key listener for Copilot inputs
-    if (searchCopilotInputGrid && searchCopilotButtons[0]) {
-      addEnterKeyListener(searchCopilotInputGrid, searchCopilotButtons[0]);
-    }
-    if (searchCopilotInputList && searchCopilotButtons[1]) {
-      addEnterKeyListener(searchCopilotInputList, searchCopilotButtons[1]);
-    }
-
-    // Apply Enter key listener for ChatGPT inputs
-    if (searchChatgptInputGrid && searchChatgptButtons[0]) {
-      addEnterKeyListener(searchChatgptInputGrid, searchChatgptButtons[0]);
-    }
-    if (searchChatgptInputList && searchChatgptButtons[1]) {
-      addEnterKeyListener(searchChatgptInputList, searchChatgptButtons[1]);
-    }
-
-    // Apply Enter key listener for Wikipedia inputs
-    if (searchWikipediaInputGrid && searchWikipediaButtons[0]) {
-      addEnterKeyListener(searchWikipediaInputGrid, searchWikipediaButtons[0]);
-    }
-    if (searchWikipediaInputList && searchWikipediaButtons[1]) {
-      addEnterKeyListener(searchWikipediaInputList, searchWikipediaButtons[1]);
+      if (buttonList) {
+        buttonList.addEventListener('click', () => {
+          const searchTerm = inputList.value;
+          let url = baseUrl;
+           if (idSuffix === 'youtube') {
+            url = `https://www.youtube.com/results?search_query=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'google') {
+            url = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'reddit') {
+            url = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:reddit.com`;
+          } else if (idSuffix === 'dribbble') {
+            url = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:dribbble.com&tbm=isch`; /* Added &tbm=isch for image search */
+          } else if (idSuffix === 'behance') {
+            url = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)} site:behance.net&tbm=isch`; /* Added &tbm=isch for image search */
+          } else if (idSuffix === 'copilot') {
+            url = `https://www.bing.com/search?showconv=1&sendquery=1&q=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'chatgpt') {
+            url = `https://chat.openai.com/?q=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'wikipedia') {
+            url = `https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(searchTerm)}`;
+          } else if (idSuffix === 'perplexity') {
+            url = `https://www.perplexity.ai/search?q=${encodeURIComponent(searchTerm)}`;
+          }
+          window.open(url, '_blank');
+        });
+        addEnterKeyListener(inputList, buttonList);
+      }
     }
 
-    // Apply Enter key listener for Perplexity inputs
-    if (searchPerplexityInputGrid && searchPerplexityButtons[0]) {
-      addEnterKeyListener(searchPerplexityInputGrid, searchPerplexityButtons[0]);
-    }
-    if (searchPerplexityInputList && searchPerplexityButtons[1]) {
-      addEnterKeyListener(searchPerplexityInputList, searchPerplexityButtons[1]);
-    }
+    // Set up search for each engine
+    setupSearch('reddit', 'https://www.google.com/search?q= site:reddit.com');
+    setupSearch('dribbble', 'https://www.google.com/search?q= site:dribbble.com');
+    setupSearch('behance', 'https://www.google.com/search?q= site:behance.net');
+    setupSearch('youtube', 'https://www.youtube.com/results?search_query=');
+    setupSearch('google', 'https://www.google.com/search?q=');
+    setupSearch('copilot', 'https://www.bing.com/search?showconv=1&sendquery=1&q=');
+    setupSearch('chatgpt', 'https://chat.openai.com/?q=');
+    setupSearch('wikipedia', 'https://en.wikipedia.org/w/index.php?search=');
+    setupSearch('perplexity', 'https://www.perplexity.ai/search?q=');
+
   </script>
 </body>
 
