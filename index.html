@@ -4,6 +4,14 @@
 <head>
   <title>Keelan's Search</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#131314">
+  
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
   <style>
@@ -322,6 +330,14 @@
     setupSearch('wikipedia', 'https://en.wikipedia.org/w/index.php?search=');
     setupSearch('perplexity', 'https://www.perplexity.ai/search?q=');
 
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => {
+          console.log('Service worker registration failed:', err);
+        });
+      });
+    }
   </script>
 </body>
 
