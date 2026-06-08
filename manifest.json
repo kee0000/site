@@ -1,6 +1,6 @@
 {
   "name": "Keelan's Search",
-  "short_name": "Search",
+  "short_name": "KSearch",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#131314",
